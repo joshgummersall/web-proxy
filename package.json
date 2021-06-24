@@ -1,0 +1,20 @@
+{
+  "name": "web-proxy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Josh Gummersall",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "http-proxy": "^1.18.1",
+    "simples": "^0.8.8",
+    "socket.io-parser": "^4.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "scripts": {
+    "watch": "nodemon index.mjs"
+  }
+}
