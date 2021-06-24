@@ -13,7 +13,7 @@ const proxy = httpProxy.createProxyServer({
 proxy.on("open", (socket) => {
   socket.on("data", (data) =>
     console.log(
-      chalk.bgRed("target -> client"),
+      chalk.black.bgYellow("target -> client"),
       data?.toString?.("utf8").trim()
     )
   );
@@ -22,12 +22,14 @@ proxy.on("open", (socket) => {
 proxy.on("proxyReqWs", (_proxyReq, _req, socket) => {
   const parser = new Parser(0, null);
 
-  parser.on("frame", (frame) =>
-    console.log(
-      chalk.black.bgGreen("client -> target"),
-      frame?.data?.toString?.("utf8").trim()
-    )
-  );
+  parser
+    .on("error", (err) => console.error(chalk.bgRed("ERROR"), err.message))
+    .on("frame", (frame) =>
+      console.log(
+        chalk.black.bgGreen("client -> target"),
+        frame?.data?.toString?.("utf8").trim()
+      )
+    );
 
   socket.pipe(parser);
 });
